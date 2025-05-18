@@ -14,6 +14,7 @@ namespace Data
         public DbSet<GameCompany> GameCompanies { get; set; }
         public DbSet<CreatorGame> CreatorGames { get; set; }
         public DbSet<GameCompanyCreator> GameCompanyCreators { get; set; }
+        public DbSet<PlayerGame> PlayerGames { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

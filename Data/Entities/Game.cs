@@ -15,5 +15,6 @@ namespace Data.Entities
         [Required]
         public string Name { get; set; }
         public List<Achievement> Achievements { get; set; }
+        public ICollection<Player> Players { get; set; }
     }
 }

@@ -1,11 +1,11 @@
-﻿using Data;
+﻿using Core;
+using Data;
 using Data.Entities;
 
 namespace ConsoleApp
 {
     internal class Program
     {
-        SteamContext context = new SteamContext();
 
         public void Main(string[] args)
         {
@@ -15,7 +15,6 @@ namespace ConsoleApp
             // games
             // achievements
             // game copmanies
-            if (context.GameCompanies.Count() == 0) InputIt();
 
             while (true)
             {
@@ -32,58 +31,13 @@ namespace ConsoleApp
             Console.WriteLine("4. Изведи всички NeSteam постижения");
             Console.WriteLine("5. Изведи всички NeSteam копмании за игри");
             Console.WriteLine("-----------------------------------------");
-            Console.WriteLine("6. Премахни играч");
-            Console.WriteLine("7. Премахни създател");
-            Console.WriteLine("8. Премахни игра");
-            Console.WriteLine("9. Премахни постижение");
-            Console.WriteLine("10. Премахни компания за игри");
-        }
-
-        public void InputIt()
-        {
-
-            using (StreamReader reader = new StreamReader("input.txt"))
-            {
-                string line;
-                int i = 0;
-                while ((line = reader.ReadLine()) != null)
-                {
-                    // Първите 5 реда се добавят Achievement-и
-                    if (i < 5)
-                    {
-                        context.Achievements.Add(new Achievement() { GameId = i, Name = line });
-                    }
-                    // Следващите 5 се добавят игри
-                    else if (i < 10)
-                    {
-                        context.Games.Add(new Game() { Name = line });
-                    }
-                    else if (i < 15)
-                    {
-                        context.Creators.Add(new Creator() { Name = line });
-                    }
-                    else if (i < 20)
-                    {
-                        context.Players.Add(new Player() { Name = line, GameId = i - 15 });
-                    }
-                    else if (i < 25)
-                    {
-                        context.GameCompanies.Add(new GameCompany() { Name = line });
-                    }
-                    else if (i < 30)
-                    {
-                        int[] creatorsAndGames = line.Split(' ').Select(int.Parse).ToArray();
-                        context.CreatorGames.Add(new CreatorGame() { CreatorId = creatorsAndGames[0], GameId = creatorsAndGames[1] });
-                    }
-                    else if (i < 35)
-                    {
-                        int[] gameCompanyCreator = line.Split(' ').Select(int.Parse).ToArray();
-                        context.GameCompanyCreators.Add(new GameCompanyCreator() { GameCompanyId = gameCompanyCreator[0], CreatorId = gameCompanyCreator[1] });
-                    }
-                    i++;
-                }
-            }
-
+            Console.WriteLine("6. Изведи всички игри, които има играч");
+            Console.WriteLine("7. Изведи всички постижения, които има игра");
+            Console.WriteLine("8. Изведи всички игри, които има компания");
+            Console.WriteLine("9. Изведи ");
+            Console.WriteLine("-----------------------------------------");
+            Console.WriteLine("10. Изведи конкретни постижения от всички компании");
+            Console.WriteLine("11. Изведи конкретни играчи от всички компании");
         }
 
         public void WhatsTheCase(int command)
@@ -92,38 +46,35 @@ namespace ConsoleApp
             {
                 case 1:
                     // Изведи всички NeSteam играчи
-                    foreach (Player player in context.Players)
-                    {
-                        Console.WriteLine(player.Name);
-                    }
+                    PlayerController.DisplayAllPlayers();
                     break;
                 case 2:
                     // Изведи всички NeSteam създатели
-                    foreach (Creator creator in context.Creators)
-                    {
-                        Console.WriteLine(creator.Name);
-                    }
+                    CreatorController.DisplayAllCreators();
                     break;
                 case 3:
                     // Изведи всички NeSteam игри
-                    foreach (Game game in context.Games)
-                    {
-                        Console.WriteLine(game.Name);
-                    }
+                    GameController.DisplayAllGames();
                     break;
                 case 4:
                     // Изведи всички NeSteam постижения
-                    foreach (Achievement achievement in context.Achievements)
-                    {
-                        Console.WriteLine(achievement.Name);
-                    }
+                    AchievementController.DisplayAllAchievements();
                     break;
                 case 5:
                     // Изведи всички NeSteam компании за игри
-                    foreach (GameCompany gameCompany in context.GameCompanies)
+                    GameCompanyController.DisplayAllGameCompanies();
+                    break;
+                case 6:
+                    // Изведи всички игри, които има играч
+                    Console.Write("Въведи ID на играча, за да видиш игрите му: ");
+                    int playerId = int.Parse(Console.ReadLine());
+                    List<string> games = PlayerController.GetAllGamesAPlayerHas(playerId);
+                    foreach (string gameName in games)
                     {
-                        Console.WriteLine(gameCompany.Name);
+                        Console.WriteLine(gameName);
                     }
+                    break;
+                case 7:
                     break;
                 default:
                     break;

@@ -14,8 +14,6 @@ namespace Data.Entities
         public int PlayerId { get; set; }
         [Required]
         public string Name { get; set; }
-        [ForeignKey(nameof(GameInstance))]
-        public int GameId {  get; set; }
-        public Game GameInstance { get; set; }
+        public ICollection<Game> Games { get; set; }
     }
 }
