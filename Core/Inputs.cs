@@ -31,23 +31,28 @@ namespace Core
                     {
                         context.Games.Add(new Game() { Name = line });
                     }
+                    // създатели
                     else if (i < 15)
                     {
                         context.Creators.Add(new Creator() { Name = line });
                     }
+                    // играчи
                     else if (i < 20)
                     {
-                        context.Players.Add(new Player() { Name = line, GameId = i - 15 });
+                        context.Players.Add(new Player() { Name = line });
                     }
+                    // компании за игри
                     else if (i < 25)
                     {
                         context.GameCompanies.Add(new GameCompany() { Name = line });
                     }
+                    // създатели и игри
                     else if (i < 30)
                     {
                         int[] creatorsAndGames = line.Split(' ').Select(int.Parse).ToArray();
                         context.CreatorGames.Add(new CreatorGame() { CreatorId = creatorsAndGames[0], GameId = creatorsAndGames[1] });
                     }
+                    // компании и създатели
                     else if (i < 35)
                     {
                         int[] gameCompanyCreator = line.Split(' ').Select(int.Parse).ToArray();

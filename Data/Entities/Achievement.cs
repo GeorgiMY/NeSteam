@@ -20,5 +20,10 @@ namespace Data.Entities
         [Required]
         public int GameId { get; set; }
         public Game GameInstance { get; set; }
+
+        [ForeignKey(nameof(PlayerInstance))]
+        [Required]
+        public int PlayerId { get; set; }
+        public Player PlayerInstance { get; set; }
     }
 }

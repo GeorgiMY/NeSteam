@@ -22,5 +22,15 @@ namespace Core
 
             return gameNames;
         }
+
+        public static List<string> GetAllAchievementsFromGame(int gameId)
+        {
+
+            SteamContext context = new SteamContext();
+
+            List<string> achievementNames = context.Achievements.Where(ach => ach.GameId == gameId).Select(ach => ach.Name).ToList();
+
+            return achievementNames;
+        }
     }
 }
