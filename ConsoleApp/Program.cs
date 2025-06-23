@@ -1,6 +1,4 @@
 ﻿using Core;
-using Data;
-using Data.Entities;
 using System.Diagnostics.Metrics;
 using System.Reflection.Metadata;
 
@@ -39,24 +37,20 @@ namespace ConsoleApp
         //2 2
         //3 3
         //4 4
-        //0 0
-        //1 1
-        //2 2
-        //3 3
-        //4 4
         // input.txt ^^^^^^^^^^^^^
 
         static void Main(string[] args)
         {
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             // replica na steam
-            //Inputs.InputIt();
+            Inputs.InputIt();
             Intro();
 
             while (true)
             {
                 ShowWAT();
-                string input = Console.ReadLine();
+                int input = int.Parse(Console.ReadLine());
+                WhatsTheCase(input);
             }
         }
 
@@ -96,29 +90,55 @@ namespace ConsoleApp
             Console.WriteLine(" `-----'     `--'     `------'   `--' `--'  `--'   `--'        `--' '--'  `------'  `--'       `------'    `--'       `-----'    `--' `--' ");
         }
 
-        public void WhatsTheCase(int command)
+        public static void WhatsTheCase(int command)
         {
             switch (command)
             {
                 case 1:
                     // Изведи всички NeSteam играчи
-                    PlayerController.DisplayAllPlayers();
+                    List<string> allPlayers = PlayerController.DisplayAllPlayers();
+                    Console.WriteLine("Всички NeSteam играчи:");
+                    foreach (string playerName in allPlayers)
+                    {
+                        Console.WriteLine(playerName);
+                    }
+                    
                     break;
                 case 2:
                     // Изведи всички NeSteam създатели
-                    CreatorController.DisplayAllCreators();
+                    List<string> allCreators = CreatorController.DisplayAllCreators();
+                    Console.WriteLine("Всички NeSteam създатели:");
+                    foreach (string creatorName in allCreators)
+                    {
+                        Console.WriteLine(creatorName);
+                    }
                     break;
                 case 3:
                     // Изведи всички NeSteam игри
-                    GameController.DisplayAllGames();
+                    List<string> allGames = GameController.DisplayAllGames();
+                    Console.WriteLine("Всички NeSteam игри:");
+                    foreach (string gameName in allGames)
+                    {
+                        Console.WriteLine(gameName);
+                    }
                     break;
                 case 4:
                     // Изведи всички NeSteam постижения
-                    AchievementController.DisplayAllAchievements();
+                    List<string> allAchievements = AchievementController.DisplayAllAchievements();
+                    Console.WriteLine("Всички NeSteam постижения");
+                    foreach (string achievementName in allAchievements)
+                    {
+                        Console.WriteLine(achievementName);
+                    }
                     break;
                 case 5:
                     // Изведи всички NeSteam компании за игри
-                    GameCompanyController.DisplayAllGameCompanies();
+                    List<string> allGameCompanies = GameCompanyController.DisplayAllGameCompanies();
+                    Console.WriteLine("Всички NeSteam компании за игри:");
+                    foreach (string companyName in allGameCompanies)
+                    {
+                        Console.WriteLine(companyName);
+                    }
                     break;
                 case 6:
                     // Изведи всички игри, които има играч
@@ -174,7 +194,6 @@ namespace ConsoleApp
                         Console.WriteLine(ach);
                     }
                     break;
-
                 case 11:
                     // Изведи всички играчи от всички компании
                     Console.Write("Въведи ID на компания, за да видиш всички нейни играчи: ");

@@ -11,7 +11,6 @@ namespace Data.Entities
     {
         [Key]
         public int CreatorId { get; set; }
-        [Required]
         public string Name { get; set; }
     }
 }

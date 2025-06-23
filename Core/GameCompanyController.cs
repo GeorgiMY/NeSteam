@@ -54,11 +54,11 @@ namespace Core
         {
             SteamContext context = new SteamContext();
 
-            var playerNames = context.Games
-                .Where(g => g.GameCompanyId == companyId)
-                .Include(g => g.Players)
-                .SelectMany(g => g.Players)
-                .Select(p => p.Name)
+            var playerNames = context.Achievements
+                .Include(x => x.GameInstance)
+                .ThenInclude(x => x.GameCompany)
+                .Where(x => x.GameInstance.GameCompany.GameCompanyId == companyId)
+                .Select(x => x.PlayerInstance.Name)
                 .Distinct()
                 .ToList();
 

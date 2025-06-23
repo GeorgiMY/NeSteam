@@ -13,12 +13,11 @@ namespace Data
         public DbSet<Game> Games { get; set; }
         public DbSet<GameCompany> GameCompanies { get; set; }
         public DbSet<CreatorGame> CreatorGames { get; set; }
-        public DbSet<GameCompanyCreator> GameCompanyCreators { get; set; }
-        public DbSet<PlayerGame> PlayerGames { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            base.OnConfiguring(optionsBuilder.UseSqlServer("Data Source=DESKTOP-UJV4L9P\\MSI;Initial Catalog=SteamCopy;Integrated Security=True;TrustServerCertificate=True"));
+            //base.OnConfiguring(optionsBuilder.UseSqlServer("Data Source=DESKTOP-UJV4L9P\\MSI;Initial Catalog=SteamCopy;Integrated Security=True;TrustServerCertificate=True"));
+            base.OnConfiguring(optionsBuilder.UseSqlServer("Data Source=STUDENT17;Initial Catalog=SteamCopy;Integrated Security=True;TrustServerCertificate=True"));
         }
     }
 }

@@ -9,12 +9,7 @@ namespace Core
         public static List<string> DisplayAllPlayers()
         {
             SteamContext context = new SteamContext();
-            List<string> players = new List<string>();
-
-            foreach (Player player in context.Players)
-            {
-                players.Add(player.Name);
-            }
+            List<string> players = context.Players.Select(p => p.Name).ToList();
 
             return players;
         }
@@ -23,7 +18,7 @@ namespace Core
         {
             SteamContext context = new SteamContext();
 
-            List<string> gameNames = context.PlayerGames.Where(pg => pg.PlayerId == playerId).Include(pg => pg.GameInstance).Select(pg => pg.GameInstance.Name).ToList();
+            List<string> gameNames = context.Achievements.Where(pg => pg.PlayerId == playerId).Include(pg => pg.GameInstance).Select(pg => pg.GameInstance.Name).ToList();
 
             return gameNames;
         }

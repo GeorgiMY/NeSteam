@@ -12,9 +12,7 @@ namespace Data.Entities
     {
         [Key]
         public int PlayerId { get; set; }
-        [Required]
         public string Name { get; set; }
-        public ICollection<Game> Games { get; set; }
-        public ICollection<Achievement> Achievements { get; set; }
+        public ICollection<Achievement> Achievements { get; set; } = new List<Achievement>();
     }
 }

@@ -12,11 +12,8 @@ namespace Data.Entities
     {
         [Key]
         public int GameId { get; set; }
-        [Required]
         public string Name { get; set; }
-        public List<Achievement> Achievements { get; set; }
-        public ICollection<Player> Players { get; set; }
-        [Required]
+        public ICollection<Achievement> Achievements { get; set; } = new List<Achievement>();
         public int GameCompanyId { get; set; }
         public GameCompany GameCompany { get; set; }
     }

@@ -2,10 +2,10 @@
 
 #nullable disable
 
-namespace Data.Migrations
+namespace NeSteam.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class mig1 : Migration
+    public partial class MigMig : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -47,30 +47,6 @@ namespace Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Players", x => x.PlayerId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "GameCompanyCreators",
-                columns: table => new
-                {
-                    GameCompanyId = table.Column<int>(type: "int", nullable: false),
-                    CreatorId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GameCompanyCreators", x => new { x.GameCompanyId, x.CreatorId });
-                    table.ForeignKey(
-                        name: "FK_GameCompanyCreators_Creators_CreatorId",
-                        column: x => x.CreatorId,
-                        principalTable: "Creators",
-                        principalColumn: "CreatorId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GameCompanyCreators_GameCompanies_GameCompanyId",
-                        column: x => x.GameCompanyId,
-                        principalTable: "GameCompanies",
-                        principalColumn: "GameCompanyId",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -144,54 +120,6 @@ namespace Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.CreateTable(
-                name: "GamePlayer",
-                columns: table => new
-                {
-                    GamesGameId = table.Column<int>(type: "int", nullable: false),
-                    PlayersPlayerId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_GamePlayer", x => new { x.GamesGameId, x.PlayersPlayerId });
-                    table.ForeignKey(
-                        name: "FK_GamePlayer_Games_GamesGameId",
-                        column: x => x.GamesGameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_GamePlayer_Players_PlayersPlayerId",
-                        column: x => x.PlayersPlayerId,
-                        principalTable: "Players",
-                        principalColumn: "PlayerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "PlayerGames",
-                columns: table => new
-                {
-                    PlayerId = table.Column<int>(type: "int", nullable: false),
-                    GameId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_PlayerGames", x => new { x.PlayerId, x.GameId });
-                    table.ForeignKey(
-                        name: "FK_PlayerGames_Games_GameId",
-                        column: x => x.GameId,
-                        principalTable: "Games",
-                        principalColumn: "GameId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_PlayerGames_Players_PlayerId",
-                        column: x => x.PlayerId,
-                        principalTable: "Players",
-                        principalColumn: "PlayerId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
             migrationBuilder.CreateIndex(
                 name: "IX_Achievements_GameId",
                 table: "Achievements",
@@ -208,24 +136,9 @@ namespace Data.Migrations
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameCompanyCreators_CreatorId",
-                table: "GameCompanyCreators",
-                column: "CreatorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GamePlayer_PlayersPlayerId",
-                table: "GamePlayer",
-                column: "PlayersPlayerId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Games_GameCompanyId",
                 table: "Games",
                 column: "GameCompanyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_PlayerGames_GameId",
-                table: "PlayerGames",
-                column: "GameId");
         }
 
         /// <inheritdoc />
@@ -238,22 +151,13 @@ namespace Data.Migrations
                 name: "CreatorGames");
 
             migrationBuilder.DropTable(
-                name: "GameCompanyCreators");
-
-            migrationBuilder.DropTable(
-                name: "GamePlayer");
-
-            migrationBuilder.DropTable(
-                name: "PlayerGames");
+                name: "Players");
 
             migrationBuilder.DropTable(
                 name: "Creators");
 
             migrationBuilder.DropTable(
                 name: "Games");
-
-            migrationBuilder.DropTable(
-                name: "Players");
 
             migrationBuilder.DropTable(
                 name: "GameCompanies");

@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Data\Data.csproj" />
+    <ProjectReference Include="..\Data\NeSteam.Data.csproj" />
   </ItemGroup>
 
 </Project>

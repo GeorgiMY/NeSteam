@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace Data.Migrations
+namespace NeSteam.Data.Migrations
 {
     [DbContext(typeof(SteamContext))]
-    [Migration("20250519064016_mig1")]
-    partial class mig1
+    [Migration("20250623084635_MigMig")]
+    partial class MigMig
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -122,21 +122,6 @@ namespace Data.Migrations
                     b.ToTable("GameCompanies");
                 });
 
-            modelBuilder.Entity("Data.Entities.GameCompanyCreator", b =>
-                {
-                    b.Property<int>("GameCompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CreatorId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GameCompanyId", "CreatorId");
-
-                    b.HasIndex("CreatorId");
-
-                    b.ToTable("GameCompanyCreators");
-                });
-
             modelBuilder.Entity("Data.Entities.Player", b =>
                 {
                     b.Property<int>("PlayerId")
@@ -152,36 +137,6 @@ namespace Data.Migrations
                     b.HasKey("PlayerId");
 
                     b.ToTable("Players");
-                });
-
-            modelBuilder.Entity("Data.Entities.PlayerGame", b =>
-                {
-                    b.Property<int>("PlayerId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("GameId")
-                        .HasColumnType("int");
-
-                    b.HasKey("PlayerId", "GameId");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("PlayerGames");
-                });
-
-            modelBuilder.Entity("GamePlayer", b =>
-                {
-                    b.Property<int>("GamesGameId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PlayersPlayerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("GamesGameId", "PlayersPlayerId");
-
-                    b.HasIndex("PlayersPlayerId");
-
-                    b.ToTable("GamePlayer");
                 });
 
             modelBuilder.Entity("Data.Entities.Achievement", b =>
@@ -231,59 +186,6 @@ namespace Data.Migrations
                         .IsRequired();
 
                     b.Navigation("GameCompany");
-                });
-
-            modelBuilder.Entity("Data.Entities.GameCompanyCreator", b =>
-                {
-                    b.HasOne("Data.Entities.Creator", "CreatorInstance")
-                        .WithMany()
-                        .HasForeignKey("CreatorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.GameCompany", "GameCompanyInstance")
-                        .WithMany()
-                        .HasForeignKey("GameCompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CreatorInstance");
-
-                    b.Navigation("GameCompanyInstance");
-                });
-
-            modelBuilder.Entity("Data.Entities.PlayerGame", b =>
-                {
-                    b.HasOne("Data.Entities.Game", "GameInstance")
-                        .WithMany()
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.Player", "PlayerInstance")
-                        .WithMany()
-                        .HasForeignKey("PlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("GameInstance");
-
-                    b.Navigation("PlayerInstance");
-                });
-
-            modelBuilder.Entity("GamePlayer", b =>
-                {
-                    b.HasOne("Data.Entities.Game", null)
-                        .WithMany()
-                        .HasForeignKey("GamesGameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Data.Entities.Player", null)
-                        .WithMany()
-                        .HasForeignKey("PlayersPlayerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Data.Entities.Game", b =>

@@ -12,17 +12,13 @@ namespace Data.Entities
     {
         [Key]
         public int AchievementId { get; set; }
-        
-        [Required]
         public string Name { get; set; }
 
         [ForeignKey(nameof(GameInstance))]
-        [Required]
         public int GameId { get; set; }
         public Game GameInstance { get; set; }
 
         [ForeignKey(nameof(PlayerInstance))]
-        [Required]
         public int PlayerId { get; set; }
         public Player PlayerInstance { get; set; }
     }
